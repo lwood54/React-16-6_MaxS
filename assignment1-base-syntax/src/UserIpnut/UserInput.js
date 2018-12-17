@@ -1,6 +1,6 @@
 import React from 'react';
 
-const userinput = props => {
+const userInput = props => {
   return (
     <div>
       <input
@@ -13,4 +13,4 @@ const userinput = props => {
   );
 };
 
-export default userinput;
+export default userInput;
