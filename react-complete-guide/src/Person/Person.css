@@ -7,3 +7,8 @@
   padding: 16px;
   text-align: center;
 }
+
+.section2 {
+  display: block;
+  margin-top: 10px;
+}

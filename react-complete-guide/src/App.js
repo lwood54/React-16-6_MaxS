@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import ValidationComponent from './ValidationComponent/ValidationComponent';
 
 class App extends Component {
   state = {
@@ -9,7 +10,8 @@ class App extends Component {
       { id: '34', name: 'Tiffany', age: 36 },
       { id: '14', name: 'Amrynn', age: 7 },
       { id: '24', name: 'Eisley', age: 7 }
-    ]
+    ],
+    inputLength: 0
   };
 
   nameChangedHandler = (event, id) => {
@@ -56,6 +58,13 @@ class App extends Component {
     });
   };
 
+  lengthHandler = event => {
+    let currentInputLength = event.target.value.length;
+    this.setState({
+      inputLength: currentInputLength
+    });
+  };
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -94,6 +103,11 @@ class App extends Component {
           Show/Hide Names
         </button>
         {persons}
+        <div className="section2">
+          <input onChange={this.lengthHandler} />
+          <p>Input Length: {this.state.inputLength}</p>
+        </div>
+        <ValidationComponent inputLength={this.state.inputLength} />
       </div>
     );
   }
@@ -102,10 +116,10 @@ class App extends Component {
 export default App;
 
 /*
-  1. Create an input field (in App Component) with a change listener which outputs the length
+  -------> 1. Create an input field (in App Component) with a change listener which outputs the length
     of the entered text below it (e.g. in a paragraph)
-  2. Create a new component (=> ValidationComponent) which receives the text length as a prop
-  3. Inside the ValidationComponent, either output "Text too short" or "Text long enough"
+  -------> 2. Create a new component (=> ValidationComponent) which receives the text length as a prop
+  -------> 3. Inside the ValidationComponent, either output "Text too short" or "Text long enough"
     depending on the text length (e.g. take 5 as a minimum length)
   4. Create another component (=> CharComponent) and style it as an inline box
     (=> display: inline-block, padding: 16px, text-align: center, margin: 16px, border: 1px solid black)
