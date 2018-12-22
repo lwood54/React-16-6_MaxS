@@ -73,7 +73,8 @@ class App extends Component {
     let chars = [...this.state.charList];
     chars.splice(charIndex, 1);
     this.setState({
-      charList: chars
+      charList: chars,
+      inputLength: chars.length
     });
   };
 
@@ -132,7 +133,11 @@ class App extends Component {
         </button>
         {persons}
         <div className="section2">
-          <input onChange={this.lengthHandler} />
+          <input
+            type="text"
+            onChange={this.lengthHandler}
+            value={this.state.charList.join('')}
+          />
           <p>Input Length: {this.state.inputLength}</p>
         </div>
         <ValidationComponent inputLength={this.state.inputLength} />
