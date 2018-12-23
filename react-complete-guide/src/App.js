@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 import ValidationComponent from './ValidationComponent/ValidationComponent';
 import CharComponent from './CharComponent/CharComponent';
@@ -87,7 +88,12 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       cursor: 'pointer',
-      padding: '8px'
+      padding: '8px',
+      ':hover': {
+        // using Radium, we can use any pseudo selector and add an object of styles
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -113,6 +119,11 @@ class App extends Component {
       );
       // dynamically & conditionally styling the background-color
       style.backgroundColor = 'red';
+      // also additionally update :hover if (this.state.showPersons)
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      };
     }
 
     let classes = [];
@@ -161,7 +172,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App); // wrap app in higher order component
 
 /*
   -------> 1. Create an input field (in App Component) with a change listener which outputs the length
