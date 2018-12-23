@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 import ValidationComponent from './ValidationComponent/ValidationComponent';
 import CharComponent from './CharComponent/CharComponent';
@@ -149,25 +149,28 @@ class App extends Component {
       </div>
     );
 
+    // must wrap return div in special <StyleRoot> because it's not just a pseudo selector
     return (
-      <div className="App">
-        <h1>Hi, I'm a React App!</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
-          Show/Hide Names
-        </button>
-        {persons}
-        <div className="section2">
-          <input
-            type="text"
-            onChange={this.lengthHandler}
-            value={this.state.charList.join('')}
-          />
-          <p>Input Length: {this.state.inputLength}</p>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I'm a React App!</h1>
+          <p className={classes.join(' ')}>This is really working!</p>
+          <button style={style} onClick={this.togglePersonsHandler}>
+            Show/Hide Names
+          </button>
+          {persons}
+          <div className="section2">
+            <input
+              type="text"
+              onChange={this.lengthHandler}
+              value={this.state.charList.join('')}
+            />
+            <p>Input Length: {this.state.inputLength}</p>
+          </div>
+          <ValidationComponent inputLength={this.state.inputLength} />
+          {charList}
         </div>
-        <ValidationComponent inputLength={this.state.inputLength} />
-        {charList}
-      </div>
+      </StyleRoot>
     );
   }
 }
