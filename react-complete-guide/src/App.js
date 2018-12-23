@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium, { StyleRoot } from 'radium';
+// import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 import ValidationComponent from './ValidationComponent/ValidationComponent';
 import CharComponent from './CharComponent/CharComponent';
@@ -88,12 +88,12 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       cursor: 'pointer',
-      padding: '8px',
-      ':hover': {
-        // using Radium, we can use any pseudo selector and add an object of styles
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      padding: '8px'
+      // ':hover': {
+      //   // using Radium, we can use any pseudo selector and add an object of styles
+      //   backgroundColor: 'lightgreen',
+      //   color: 'black'
+      // }
     };
 
     let persons = null;
@@ -120,10 +120,10 @@ class App extends Component {
       // dynamically & conditionally styling the background-color
       style.backgroundColor = 'red';
       // also additionally update :hover if (this.state.showPersons)
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      };
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // };
     }
 
     let classes = [];
@@ -151,31 +151,32 @@ class App extends Component {
 
     // must wrap return div in special <StyleRoot> because it's not just a pseudo selector
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a React App!</h1>
-          <p className={classes.join(' ')}>This is really working!</p>
-          <button style={style} onClick={this.togglePersonsHandler}>
-            Show/Hide Names
-          </button>
-          {persons}
-          <div className="section2">
-            <input
-              type="text"
-              onChange={this.lengthHandler}
-              value={this.state.charList.join('')}
-            />
-            <p>Input Length: {this.state.inputLength}</p>
-          </div>
-          <ValidationComponent inputLength={this.state.inputLength} />
-          {charList}
+      // <StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a React App!</h1>
+        <p className={classes.join(' ')}>This is really working!</p>
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Show/Hide Names
+        </button>
+        {persons}
+        <div className="section2">
+          <input
+            type="text"
+            onChange={this.lengthHandler}
+            value={this.state.charList.join('')}
+          />
+          <p>Input Length: {this.state.inputLength}</p>
         </div>
-      </StyleRoot>
+        <ValidationComponent inputLength={this.state.inputLength} />
+        {charList}
+      </div>
+      // </StyleRoot>
     );
   }
 }
 
-export default Radium(App); // wrap app in higher order component
+export default App;
+// export default Radium(App); // wrap app in higher order component
 
 /*
   -------> 1. Create an input field (in App Component) with a change listener which outputs the length
