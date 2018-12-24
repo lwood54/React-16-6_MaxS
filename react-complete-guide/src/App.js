@@ -82,21 +82,23 @@ class App extends Component {
   ////////  render() ////////
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      cursor: 'pointer',
-      padding: '8px'
-      // ':hover': {
-      //   // using Radium, we can use any pseudo selector and add an object of styles
-      //   backgroundColor: 'lightgreen',
-      //   color: 'black'
-      // }
-    };
+    // CHANGED TO CSS MODULE
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   cursor: 'pointer',
+    //   padding: '8px'
+    // ':hover': {
+    //   // using Radium, we can use any pseudo selector and add an object of styles
+    //   backgroundColor: 'lightgreen',
+    //   color: 'black'
+    // }
+    // };
 
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -117,8 +119,9 @@ class App extends Component {
           })}
         </div>
       );
+      btnClass = classes.Red;
       // dynamically & conditionally styling the background-color
-      style.backgroundColor = 'red';
+      // style.backgroundColor = 'red'; --> CHANGING TO CSS MODULES
       // also additionally update :hover if (this.state.showPersons)
       // style[':hover'] = {
       //   backgroundColor: 'salmon',
@@ -157,7 +160,7 @@ class App extends Component {
       <div className={classes.App}>
         <h1>Hi, I'm a React App!</h1>
         <p className={assignedClasses.join(' ')}>This is really working!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>
           Show/Hide Names
         </button>
         {persons}
