@@ -3,6 +3,7 @@ import classes from './App.css';
 import Person from './Person/Person';
 import ValidationComponent from './ValidationComponent/ValidationComponent';
 import CharComponent from './CharComponent/CharComponent';
+// import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -88,7 +89,11 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
+            // use higher order component "ErrorBoundary" to inform user of error
+            // must move key to ErrorBoundary because that is what is mapped and needs a key
+            // key must always be on outer element when using the .map() method
             return (
+              // <ErrorBoundary key={person.id}>
               <Person
                 // using an arrow function to bind the data we are passing --> alt: .bind(this,)
                 click={() => this.deletePersonHandler(index)}
@@ -99,6 +104,7 @@ class App extends Component {
                 // we use the arrow function again to accept the event we were listening for, then we were
                 // able to pass the event because the arrow function allowed us to bind the data we were passing
               />
+              // </ErrorBoundary>
             );
           })}
         </div>
