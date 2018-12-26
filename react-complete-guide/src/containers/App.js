@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
-import ValidationComponent from './ValidationComponent/ValidationComponent';
-import CharComponent from './CharComponent/CharComponent';
-// import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Cockpit from '../components/Cockpit/Cockpit';
+import Persons from '../components/Persons/Persons';
+import ValidationComponent from '../components/ValidationComponent/ValidationComponent';
+import CharComponent from '../components/CharComponent/CharComponent';
+// import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -83,41 +84,15 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            // use higher order component "ErrorBoundary" to inform user of error
-            // must move key to ErrorBoundary because that is what is mapped and needs a key
-            // key must always be on outer element when using the .map() method
-            return (
-              // <ErrorBoundary key={person.id}>
-              <Person
-                // using an arrow function to bind the data we are passing --> alt: .bind(this,)
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={event => this.nameChangedHandler(event, person.id)}
-                // we use the arrow function again to accept the event we were listening for, then we were
-                // able to pass the event because the arrow function allowed us to bind the data we were passing
-              />
-              // </ErrorBoundary>
-            );
-          })}
-        </div>
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}
+        />
       );
-      btnClass = classes.Red;
-    }
-
-    let assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red); // classes = ['red']
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold); // classes = ['red', 'bold']
     }
 
     // map the array to print a <CharComponent /> for each element in the array
@@ -138,11 +113,12 @@ class App extends Component {
     // must wrap return div in special <StyleRoot> because it's not just a pseudo selector
     return (
       <div className={classes.App}>
-        <h1>Hi, I'm a React App!</h1>
-        <p className={assignedClasses.join(' ')}>This is really working!</p>
-        <button className={btnClass} onClick={this.togglePersonsHandler}>
-          Show/Hide Names
-        </button>
+        <Cockpit
+          appTitle={this.props.title}
+          persons={this.state.persons}
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonsHandler}
+        />
         {persons}
         <div className="section2">
           <input
