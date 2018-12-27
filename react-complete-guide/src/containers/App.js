@@ -7,6 +7,34 @@ import CharComponent from '../components/CharComponent/CharComponent';
 // import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside Constructor', props);
+    // can add state inside constructor function (older way to do this)
+    // this.state = {
+    //   persons: [
+    //     { id: '54', name: 'Logan', age: 36 },
+    //     { id: '34', name: 'Tiffany', age: 36 },
+    //     { id: '14', name: 'Amrynn', age: 7 },
+    //     { id: '24', name: 'Eisley', age: 7 }
+    //   ],
+    //   inputLength: 0,
+    //   charList: []
+    // }
+  }
+
+  componentWillMount() {
+    // Can update state
+    // DO NOT cause side-effects
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    // Can have side-effects here
+    // DO NOT update state from this lifecycle hook
+    console.log('[App.js] Inside componentDidMount()');
+  }
+
   state = {
     persons: [
       { id: '54', name: 'Logan', age: 36 },
@@ -83,6 +111,7 @@ class App extends Component {
   ////////  render() ////////
 
   render() {
+    console.log('[App.js] Inside render()');
     let persons = null;
 
     if (this.state.showPersons) {
