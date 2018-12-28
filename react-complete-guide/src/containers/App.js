@@ -35,6 +35,30 @@ class App extends Component {
     console.log('[App.js] Inside componentDidMount()');
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(
+      '[UPDATE App.js] Inside shouldComponentUpdate',
+      nextProps,
+      nextState
+    );
+    return (
+      nextState.persons !== this.state.persons ||
+      nextState.showPersons !== this.state.showPersons
+    );
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log(
+      '[UPDATE App.js] Inside componentWillUpdate',
+      nextProps,
+      nextState
+    );
+  }
+
+  componentDidUpdate() {
+    console.log('[UPDATE App.js] Inside componentDideUpdate');
+  }
+
   state = {
     persons: [
       { id: '54', name: 'Logan', age: 36 },
@@ -142,6 +166,13 @@ class App extends Component {
     // must wrap return div in special <StyleRoot> because it's not just a pseudo selector
     return (
       <div className={classes.App}>
+        <button
+          onClick={() => {
+            this.setState({ showPersons: true });
+          }}
+        >
+          Show Persons
+        </button>
         <Cockpit
           appTitle={this.props.title}
           persons={this.state.persons}
