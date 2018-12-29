@@ -4,7 +4,8 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Persons from '../components/Persons/Persons';
 import ValidationComponent from '../components/ValidationComponent/ValidationComponent';
 import CharComponent from '../components/CharComponent/CharComponent';
-import WithClass from '../hoc/WithClass';
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/withClass';
 
 // import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
@@ -167,7 +168,7 @@ class App extends PureComponent {
 
     // must wrap return div in special <StyleRoot> because it's not just a pseudo selector
     return (
-      <WithClass classes={classes.App}>
+      <Aux>
         <button
           onClick={() => {
             this.setState({ showPersons: true });
@@ -192,9 +193,9 @@ class App extends PureComponent {
         </div>
         <ValidationComponent inputLength={this.state.inputLength} />
         {charList}
-      </WithClass>
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
