@@ -14,16 +14,18 @@ class App extends PureComponent {
     super(props);
     console.log('[App.js] Inside Constructor', props);
     // can add state inside constructor function (older way to do this)
-    // this.state = {
-    //   persons: [
-    //     { id: '54', name: 'Logan', age: 36 },
-    //     { id: '34', name: 'Tiffany', age: 36 },
-    //     { id: '14', name: 'Amrynn', age: 7 },
-    //     { id: '24', name: 'Eisley', age: 7 }
-    //   ],
-    //   inputLength: 0,
-    //   charList: []
-    // }
+    this.state = {
+      persons: [
+        { id: '54', name: 'Logan', age: 36 },
+        { id: '34', name: 'Tiffany', age: 36 },
+        { id: '14', name: 'Amrynn', age: 7 },
+        { id: '24', name: 'Eisley', age: 7 }
+      ],
+      inputLength: 0,
+      charList: [],
+      showPersons: false,
+      toggleClicked: 0
+    };
   }
 
   componentWillMount() {
@@ -62,16 +64,16 @@ class App extends PureComponent {
     console.log('[UPDATE App.js] Inside componentDideUpdate');
   }
 
-  state = {
-    persons: [
-      { id: '54', name: 'Logan', age: 36 },
-      { id: '34', name: 'Tiffany', age: 36 },
-      { id: '14', name: 'Amrynn', age: 7 },
-      { id: '24', name: 'Eisley', age: 7 }
-    ],
-    inputLength: 0,
-    charList: []
-  };
+  // state = {
+  //   persons: [
+  //     { id: '54', name: 'Logan', age: 36 },
+  //     { id: '34', name: 'Tiffany', age: 36 },
+  //     { id: '14', name: 'Amrynn', age: 7 },
+  //     { id: '24', name: 'Eisley', age: 7 }
+  //   ],
+  //   inputLength: 0,
+  //   charList: []
+  // };
 
   nameChangedHandler = (event, id) => {
     // identify an index if the id in the state matches the id that is passed
@@ -111,9 +113,12 @@ class App extends PureComponent {
   };
 
   togglePersonsHandler = () => {
-    const doesShow = this.state.showPersons;
-    this.setState({
-      showPersons: !doesShow
+    const doesShow = this.state.showPersons; // can save state or use prevState...which way is better?
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1
+      };
     });
   };
 
