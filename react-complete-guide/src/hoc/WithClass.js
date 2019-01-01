@@ -13,16 +13,20 @@ import React, { Component } from 'react';
 
 //////////////////  you can also return a stateful class based component as the wrapper component /////////////////////////
 const withClass = (WrappedComponent, className) => {
-  return class extends Component {
+  const WithClass = class extends Component {
     render() {
       return (
         <div className={className}>
-          <WrappedComponent {...this.props} />{' '}
+          <WrappedComponent ref={this.props.forwardedRef} {...this.props} />{' '}
           {/* you can just pass on any props that are found in the component object*/}
         </div>
       );
     }
   };
+
+  return React.forwardRef((props, ref) => {
+    return <WithClass {...props} forwardedRef={ref} />;
+  });
 };
 
 export default withClass;
