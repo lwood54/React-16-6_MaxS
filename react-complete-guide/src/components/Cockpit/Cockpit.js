@@ -23,6 +23,7 @@ const cockpit = props => {
       <button className={btnClass} onClick={props.clicked}>
         Show/Hide Names
       </button>
+      <button onClick={props.login}>Log in</button>
     </Aux>
   );
 };

@@ -7,6 +7,9 @@ import CharComponent from '../components/CharComponent/CharComponent';
 import Aux from '../hoc/Aux';
 import withClass from '../hoc/withClass';
 
+// create React context and pass a default value of 'false', passing the 'false' value is optional
+export const AuthContext = React.createContext(false);
+
 // import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 
 class App extends PureComponent {
@@ -24,7 +27,8 @@ class App extends PureComponent {
       inputLength: 0,
       charList: [],
       showPersons: false,
-      toggleClicked: 0
+      toggleClicked: 0,
+      authenticated: false
     };
   }
 
@@ -140,6 +144,11 @@ class App extends PureComponent {
     });
   };
 
+  loginHandler = () => {
+    console.log('RUNNING loginHandler');
+    this.setState({ authenticated: true });
+  };
+
   ////////  render() ////////
 
   render() {
@@ -186,8 +195,11 @@ class App extends PureComponent {
           persons={this.state.persons}
           showPersons={this.state.showPersons}
           clicked={this.togglePersonsHandler}
+          login={this.loginHandler}
         />
-        {persons}
+        <AuthContext.Provider value={this.state.authenticated}>
+          {persons}
+        </AuthContext.Provider>
         <div className="section2">
           <input
             type="text"

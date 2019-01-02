@@ -12,7 +12,14 @@ import React, { Component } from 'react';
 // };
 
 //////////////////  you can also return a stateful class based component as the wrapper component /////////////////////////
+// define an arrow function that can receive the wrapped component object and
 const withClass = (WrappedComponent, className) => {
+  console.log(
+    'INSIDE withClass!!!: className = ',
+    className,
+    'typeof: ',
+    typeof className
+  );
   const WithClass = class extends Component {
     render() {
       return (
