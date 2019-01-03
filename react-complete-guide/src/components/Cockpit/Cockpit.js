@@ -28,4 +28,8 @@ const cockpit = props => {
   );
 };
 
-export default cockpit;
+// React.memo() works in a similar way as creating a PureComponent in that it will only render if
+// the props are changed. It does a shallow check. This is a nice additional feature that allows the
+// continued use of functional components, not requiring the conversion to a class based component
+// when not needed.
+export default React.memo(cockpit);
